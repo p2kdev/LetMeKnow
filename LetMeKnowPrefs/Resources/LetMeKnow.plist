@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+	<key>items</key>
+
+		<array>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Call Type</string>
+				<key>footerText</key>
+				<string>Specifies the call type for which the call connect vibration should be played.</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSegmentCell</string>
+				<key>defaults</key>
+				<string>com.imkpatil.letmeknow</string>
+				<key>key</key>
+				<string>CallTypeForVibration</string>
+				<key>default</key>
+				<integer>3</integer>
+				<key>validTitles</key>
+				<array>
+					<string>Outgoing Only</string>
+					<string>Both</string>
+				</array>
+				<key>validValues</key>
+				<array>
+					<integer>1</integer>
+					<integer>2</integer>
+				</array>
+				<key>PostNotification</key>
+				<string>com.imkpatil.letmeknow.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Vibration Options</string>
+				<key>footerText</key>
+				<string>The Taptic Vibration options only apply for newer devices (iPhone 7 and up!) Older devices will vibrate using the standard vibration.</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSLinkListCell</string>
+				<key>defaults</key>
+				<string>com.imkpatil.letmeknow</string>
+				<key>default</key>
+				<string>Medium</string>
+				<key>detail</key>
+				<string>PSListItemsController</string>
+				<key>key</key>
+				<string>LMKStrength</string>
+				<key>label</key>
+				<string>Taptic Vibration</string>
+				<key>validTitles</key>
+					<array>
+						<string>Light Impact</string>
+						<string>Medium Impact</string>
+						<string>Heavy Impact</string>
+						<string>Success Notification</string>
+						<string>Warning Notification</string>
+						<string>Error Notification</string>
+						<string>Standard (Non-Taptic)</string>
+					</array>
+				<key>validValues</key>
+				<array>
+					<string>Light</string>
+					<string>Medium</string>
+					<string>Heavy</string>
+					<string>Success</string>
+					<string>Warning</string>
+					<string>Error</string>
+					<string>Standard</string>
+				</array>
+				<key>PostNotification</key>
+				<string>com.imkpatil.letmeknow.testvibr</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>default</key>
+				<true/>
+				<key>defaults</key>
+				<string>com.imkpatil.letmeknow</string>
+				<key>key</key>
+				<string>WantsVibrOnDisc</string>
+				<key>label</key>
+				<string>Vibrate On Disconnect</string>
+				<key>PostNotification</key>
+				<string>com.imkpatil.letmeknow.settingschanged</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Support</string>
+				<key>footerText</key>
+				<string>Wish to donate? Donation link found on my twitter bio. Please click the above link to visit my twitter profile!</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>visitTwitter</string>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Follow me on Twitter @p2kdev</string>
+				<key>icon</key>
+				<string>twitter.png</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+				<key>footerText</key>
+				<string>© 2019 P2kDev (@p2kdev)</string>
+			</dict>
+
+	</array>
+
+	<key>title</key>
+	<string>LetMeKnow</string>
+</dict>
+</plist>

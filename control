@@ -1,0 +1,10 @@
+Package: com.imkpatil.letmeknow
+Name: LetMeKnow
+Depends: mobilesubstrate
+Version: 1.4.2
+Architecture: iphoneos-arm
+Description: This tweak will let you know exactly when the call connects/disconnects so that you don't have to keep holding!
+Maintainer: P2KDev <p2kdev@gmail.com>
+Author: P2KDev <p2kdev@gmail.com>
+Icon: file:///Library/Application Support/LetMeKnow/Tweakicon.png
+Section: Tweaks
