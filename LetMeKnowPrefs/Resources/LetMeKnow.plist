@@ -24,7 +24,7 @@
 				<key>key</key>
 				<string>CallTypeForVibration</string>
 				<key>default</key>
-				<integer>3</integer>
+				<integer>1</integer>
 				<key>validTitles</key>
 				<array>
 					<string>Outgoing Only</string>
@@ -35,8 +35,6 @@
 					<integer>1</integer>
 					<integer>2</integer>
 				</array>
-				<key>PostNotification</key>
-				<string>com.imkpatil.letmeknow.settingschanged</string>
 			</dict>
 
 			<dict>
@@ -81,8 +79,6 @@
 					<string>Error</string>
 					<string>Standard</string>
 				</array>
-				<key>PostNotification</key>
-				<string>com.imkpatil.letmeknow.testvibr</string>
 			</dict>
 
 			<dict>
@@ -96,9 +92,23 @@
 				<string>WantsVibrOnDisc</string>
 				<key>label</key>
 				<string>Vibrate On Disconnect</string>
-				<key>PostNotification</key>
-				<string>com.imkpatil.letmeknow.settingschanged</string>
 			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Save</string>
+			</dict>	
+
+			<dict>
+				<key>action</key>
+				<string>savePrefs</string>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Save Prefs and Test Vibration</string>
+			</dict>				
 
 			<dict>
 				<key>cell</key>
@@ -107,7 +117,7 @@
 				<string>Support</string>
 				<key>footerText</key>
 				<string>Wish to donate? Donation link found on my twitter bio. Please click the above link to visit my twitter profile!</string>
-			</dict>
+			</dict>		
 
 			<dict>
 				<key>action</key>
@@ -126,7 +136,7 @@
 				<key>footerAlignment</key>
 				<integer>1</integer>
 				<key>footerText</key>
-				<string>© 2019 P2kDev (@p2kdev)</string>
+				<string>© 2022 P2kDev (@p2kdev)</string>
 			</dict>
 
 	</array>

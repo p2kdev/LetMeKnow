@@ -1,7 +1,9 @@
+export THEOS_PACKAGE_SCHEME=rootless
+export TARGET = iphone:clang:12.4:12.0
+
 include $(THEOS)/makefiles/common.mk
 
 export ARCHS = arm64 arm64e
-export TARGET = iphone:clang:12.1.2:12.0
 
 BUNDLE_NAME = LetMeKnow
 $(BUNDLE_NAME)_FILES = LMKRootListController.m

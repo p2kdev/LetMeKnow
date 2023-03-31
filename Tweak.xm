@@ -16,7 +16,7 @@
 
 static BOOL wasCallConnected = NO;
 static BOOL VibrOnDiscConn = YES ;
-static int callType = 2;
+static int callType = 1;
 static NSString* VibrStrength = @"Medium";
 
 static void PerfromVibration()
@@ -120,75 +120,21 @@ static void PerfromVibration()
 
 %end
 
-// %hook MPTelephonyManager
-//
-// -(void)handleCallStatusChanged:(id)arg1 {
-//
-//   TUCall *currentActiveCall = self.activeCall;
-//   int callStat = currentActiveCall.callStatus;
-//   bool isIncoming = currentActiveCall.isIncoming;
-//
-//   // NSString *msg = [NSString stringWithFormat:@"isIncoming %d  status = %d", isIncoming,callStat];
-//   //
-//   // UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"CallType" message:msg delegate:[[UIApplication sharedApplication] keyWindow].rootViewController cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//   // [alertView show];
-//   // [alertView release];
-//
-//   if (callStat == 1)
-//   {
-//     if ((callType == 1 && !isIncoming) || (callType == 2))
-//     {
-//       PerfromVibration();
-//     }
-//     wasCallConnected = YES;
-//   }
-//
-//   if (callStat == 0 && wasCallConnected)
-//   {
-//     if (VibrOnDiscConn)
-//     {
-//       PerfromVibration();
-//     }
-//     wasCallConnected = NO;
-//   }
-//
-//
-// 	// NSRange range = [msg rangeOfString:@"stat=Active" options: NSCaseInsensitiveSearch];
-// 	// if (range.location != NSNotFound)
-// 	// {
-//   //   //NSLog(@"LetMeKnow - Call Status changed to Active.");
-//   //   //AudioServicesPlaySystemSound(1352);
-//   //   //NSString *temp = [NSString stringWithFormat:@"arg1 - %@",self.activeCall]
-//   //   [self PlayVibration];
-//   //   hasPlayedVibration = NO;
-// 	// }
-//   //
-//   // if (VibrOnDiscConn && !hasPlayedVibration)
-//   // {
-//   //   range = [msg rangeOfString:@"stat=Disconnected" options: NSCaseInsensitiveSearch];
-//   //   if (range.location != NSNotFound)
-//   //   {
-//   //     [self PlayVibration];
-//   //     hasPlayedVibration = YES;
-//   //     //NSLog(@"LetMeKnow - Call Status changed to Disconnected.");
-//   //
-//   //   }
-//   // }
-//
-//   %orig;
-// }
-
-//  %end
-
   static void reloadSettings() {
+		static CFStringRef prefsKey = CFSTR("com.imkpatil.letmeknow");
+		CFPreferencesAppSynchronize(prefsKey);
 
-    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.imkpatil.letmeknow.plist"];
-    if(prefs)
-    {
-      VibrOnDiscConn = [prefs objectForKey:@"WantsVibrOnDisc"] ? [[prefs objectForKey:@"WantsVibrOnDisc"] boolValue] : VibrOnDiscConn;
-      VibrStrength = [prefs objectForKey:@"LMKStrength"] ? [[prefs objectForKey:@"LMKStrength"] stringValue] : VibrStrength;
-      callType = [prefs objectForKey:@"CallTypeForVibration"] ? [[prefs objectForKey:@"CallTypeForVibration"] intValue] : callType;
-    }
+		if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"WantsVibrOnDisc", prefsKey))) {
+			VibrOnDiscConn = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"WantsVibrOnDisc", prefsKey)) boolValue];
+		}
+
+		if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"LMKStrength", prefsKey))) {
+			VibrStrength = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"LMKStrength", prefsKey)) stringValue];
+		}
+
+		if (CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"CallTypeForVibration", prefsKey))) {
+			callType = [(id)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"CallTypeForVibration", prefsKey)) intValue];
+		}        
   }
 
   static void PerformVibrationAction() {
@@ -197,14 +143,6 @@ static void PerfromVibration()
   }
 
   %ctor {
-  	// if ([[NSBundle bundleWithPath:@"/System/Library/SpringBoardPlugins/IncomingCall.servicebundle"] load]) {
-    //     //NSLog(@"[LetMeKnow] Tweak Loaded Successfully!");
-  	// }
-
-    if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.apple.springboard"]) {
-          CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)reloadSettings, CFSTR("com.imkpatil.letmeknow.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-          //CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, reloadSettings, CFSTR("com.imkpatil.letmeknowprefs.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-          reloadSettings();
-          CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)PerformVibrationAction , CFSTR("com.imkpatil.letmeknow.testvibr"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-      }
+      CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)PerformVibrationAction, CFSTR("com.imkpatil.letmeknow.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+      reloadSettings();
   }
